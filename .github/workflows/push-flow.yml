@@ -1,9 +1,14 @@
 name: Push flow
-on: push
+on:
+  pull_request:
+    types: opened
+  workflow_dispatch:
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Print event details
+        run: echo "Event details ${{ toJson(github.event) }}"
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
